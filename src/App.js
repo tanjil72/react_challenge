@@ -4,23 +4,23 @@ import Signup from "./Components/Signup";
 import Login from "./Components/Login";
 import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./Components/HomePage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const setAuth = () => {
-    setIsAuthenticated(true);
-  };
+  const [isAuthenticated, setIsAuthenticated] = useState(JSON.parse(localStorage.getItem("auth")));
+  //const authStatus = localStorage.getItem("auth");
 
+  const setAuth = (value) => {
+    setIsAuthenticated(value);
+    //alert(value);
+  };
+  
   return (
-    <>
-      <Routes>
-        <Route path="/" element={
-        isAuthenticated?<HomePage />:<Login setAuth={setAuth}/>}/>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={isAuthenticated=="true" ? <HomePage setAuth={setAuth} /> : <Login setAuth={setAuth}/>} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+    </Routes>
   );
 }
 

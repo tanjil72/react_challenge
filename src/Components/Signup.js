@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link,Navigate,useNavigate} from "react-router-dom";
 
 const initialValues = [
   {
@@ -14,6 +14,7 @@ const initialValues = [
 ];
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
 
   const checkPasswordValidity = (value) => {
@@ -155,8 +156,11 @@ export default function Signup() {
           Register
         </Button>
       </Form>
+      {/* <text style={{ marginTop: 10 }} >
+        Already a user?<span style={{color:'blue'}} onClick={()=>navigate('/login')}> Login</span>
+      </text> */}
       <text style={{ marginTop: 10 }}>
-        Already a user? <Link to="/login">Login</Link>
+        Already have an account? <Link to="/">Login</Link>
       </text>
     </div>
   );

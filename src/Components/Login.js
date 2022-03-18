@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 
 const initialValues = {
   email: "",
@@ -18,6 +20,7 @@ export default function Login({setAuth}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     Login();
+
     
   };
 
@@ -39,10 +42,11 @@ export default function Login({setAuth}) {
       }
     });
     if (Found) {
-      //navigate("/");
-      setAuth()
-      let auth = true;
+      
+      setAuth("true")
+      let auth = "true";
       localStorage.setItem("auth", JSON.stringify(auth));
+      //navigate("/");
     } else {
       alert("Error email/password");
     }
@@ -86,5 +90,5 @@ export default function Login({setAuth}) {
         Don't have an account? <Link to="/signup">Register</Link>
       </text>
     </div>
-  );
+  )
 }
