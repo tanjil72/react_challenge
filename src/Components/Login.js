@@ -11,17 +11,13 @@ const initialValues = {
 export default function Login() {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
-  // const navigate = useNavigate();
   function validateForm() {
     return values.email.length > 0 && values.password.length > 0;
   }
 
-  const handleSubmit = () => {
-    alert(values.email);
-  };
-  const routeChange = () => {
-    let path = `/Signup`;
-    navigate(path);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    Login();
   };
 
   const handleInputChange = (e) => {
@@ -33,9 +29,24 @@ export default function Login() {
     });
   };
 
+  function Login() {
+    let retrievedData = localStorage.getItem("registeredUsers");
+    let users = JSON.parse(retrievedData);
+    let Found = users.find(function (user, index) {
+      if (user.email === values.email && user.password === values.password) {
+        return true;
+      }
+    });
+    if (Found) {
+      navigate("/home");
+    } else {
+      alert("Error email/password");
+    }
+  }
+
   return (
     <div className="LoginContainer">
-     <div style={{display:'flex',width:'100%'}}>
+      <div style={{ display: "flex", width: "100%" }}>
         <Form onSubmit={handleSubmit}>
           <Form.Group size="lg" controlId="email">
             <Form.Label>Email</Form.Label>
@@ -56,25 +67,20 @@ export default function Login() {
               onChange={handleInputChange}
             />
           </Form.Group>
+          <Button
+            style={{ marginTop: 10, width: 400 }}
+            block
+            size="lg"
+            type="submit"
+            // disabled={!validateForm()}
+          >
+            Login
+          </Button>
         </Form>
-        </div>
-     
-
-      <div style={{display:'flex',width:'100%',justifyContent:'center'}}>
-        <Button
-          style={{ marginTop: 10 }}
-          block
-          size="lg"
-          type="submit"
-          disabled={!validateForm()}
-        >
-          Login
-        </Button>
-        <Button style={{ marginTop: 10,marginLeft:10 }} block size="lg" onClick={routeChange}>
-          Signup
-        </Button>
       </div>
-      {/* <Link to="/signup">Signup</Link> */}
+      <text style={{ marginTop: 10 }}>
+        Don't have an account? <Link to="/signup">Register</Link>
+      </text>
     </div>
   );
 }
