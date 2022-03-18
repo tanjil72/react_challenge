@@ -156,7 +156,7 @@ export default function Signup() {
         </Button>
       </Form>
       <text style={{ marginTop: 10 }}>
-        Already a user? <Link to="/">Login</Link>
+        Already a user? <Link to="/login">Login</Link>
       </text>
     </div>
   );

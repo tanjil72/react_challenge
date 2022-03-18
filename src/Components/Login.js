@@ -8,7 +8,7 @@ const initialValues = {
   password: "",
 };
 
-export default function Login() {
+export default function Login({setAuth}) {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
   function validateForm() {
@@ -18,6 +18,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     Login();
+    
   };
 
   const handleInputChange = (e) => {
@@ -38,7 +39,10 @@ export default function Login() {
       }
     });
     if (Found) {
-      navigate("/home");
+      //navigate("/");
+      setAuth()
+      let auth = true;
+      localStorage.setItem("auth", JSON.stringify(auth));
     } else {
       alert("Error email/password");
     }
