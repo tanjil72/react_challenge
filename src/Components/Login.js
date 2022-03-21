@@ -40,7 +40,10 @@ export default function Login({ setAuth }) {
       }
     });
     if(found){
+      setAuth(true)
+      localStorage.setItem('Auth', JSON.stringify(true));
       alert("Login success")
+      navigate('/')
     }else{
       alert("Error email/password")
     }

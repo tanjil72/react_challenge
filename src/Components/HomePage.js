@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import Dialogue from "./Dialogue";
-import Search from "./Search";
 import TextField from "@mui/material/TextField";
 import List from "./List";
 import Button from "@mui/material/Button";
@@ -12,29 +9,21 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 export default function HomePage({ setAuth }) {
-  //const API_URL = "http://dummy.restapiexample.com/api/v1/employees";
-
-  const [search, setSearch] = useState("");
-  const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const [masterDataSource, setMasterDataSource] = useState([]);
-  const [dialogue, setDialogue] = useState(true);
   const [open, setOpen] = React.useState(false);
+  const [inputText, setInputText] = useState("");
 
   const [name, setName] = useState();
   const [age, setAge] = useState();
   const [salary, setSalary] = useState();
 
-  const [inputText, setInputText] = useState("");
   let inputHandler = (e) => {
-    //convert input text to lower case
     let lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
 
   const logout = () => {
-    let auth = "false";
-    localStorage.setItem("auth", JSON.stringify(auth));
-    setAuth("false");
+    setAuth(false);
+    localStorage.setItem("Auth", JSON.stringify(false));
   };
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,6 +32,8 @@ export default function HomePage({ setAuth }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+
   const handleCreate = () => {
     if (name.length > 0 && age > 0 && salary > 0) {
       try {
@@ -106,7 +97,14 @@ export default function HomePage({ setAuth }) {
           </button>
         </div>
         <List input={inputText} />
+        <div style={{ paddingBottom: 20 }}>
+          {" "}
+          <button title="Logout" onClick={logout}>
+            Logout
+          </button>
+        </div>
       </div>
+      
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Create</DialogTitle>
         <DialogContent>
@@ -134,18 +132,13 @@ export default function HomePage({ setAuth }) {
             value={age}
           />
         </DialogContent>
+
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
           <Button onClick={handleCreate}>Create</Button>
         </DialogActions>
       </Dialog>
 
-      {/* <Search/> */}
-      {/* {masterDataSource.map((user) => <Dialogue user={user} key={user.id} />)} */}
-
-      {/* <button title="Logout" onClick={logout}>
-        Logout
-      </button> */}
     </div>
   );
 }

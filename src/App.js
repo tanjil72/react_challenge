@@ -11,20 +11,21 @@ import Search from "./Components/Search";
 
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(JSON.parse(localStorage.getItem("auth")));
+  const [isAuthenticated, setIsAuthenticated] = useState(JSON.parse(localStorage.getItem("Auth")));
+  console.log(isAuthenticated)
   //const authStatus = localStorage.getItem("auth");
 
   const setAuth = (value) => {
     setIsAuthenticated(value);
-    //alert(value);
   };
+
   
   return (
     <>
    
     {/* <Navbar isAuthenticated={isAuthenticated}/> */}
     <Routes>
-      <Route path="/" element={isAuthenticated=="true" ? <HomePage setAuth={setAuth} /> : <Login setAuth={setAuth}/>} />
+      <Route path="/" element={isAuthenticated? <HomePage setAuth={setAuth} /> : <Login setAuth={setAuth}/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
     </Routes>

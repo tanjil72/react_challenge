@@ -61,6 +61,8 @@ export default function FormDialog({ user }) {
       });
   };
 
+
+
   const handleName = (e) => {
     setName(e.target.value);
   };
@@ -73,9 +75,7 @@ export default function FormDialog({ user }) {
 
   return (
     <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
-      </Button> */}
+
       <div
         style={{
           display: "flex",

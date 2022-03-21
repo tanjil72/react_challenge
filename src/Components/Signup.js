@@ -66,11 +66,13 @@ export default function Signup() {
       olddata = []
       olddata.push(data)
       localStorage.setItem('registeredUsers', JSON.stringify(olddata));
+      localStorage.setItem('Auth', JSON.stringify(false));
       alert("Registration success")
     }else{
       let oldArr = JSON.parse(olddata)
       oldArr.push(data)
       localStorage.setItem("registeredUsers", JSON.stringify(oldArr))
+      localStorage.setItem('Auth', JSON.stringify(false));
       alert("Registration success")
      
     }
@@ -152,11 +154,9 @@ export default function Signup() {
           Register
         </Button>
       </Form>
-      {/* <text style={{ marginTop: 10 }} >
-        Already a user?<span style={{color:'blue'}} onClick={()=>navigate('/login')}> Login</span>
-      </text> */}
+
       <text style={{ marginTop: 10 }}>
-        Already have an account? <Link to="/">Login</Link>
+        Already a user? <Link to="/login">Login</Link>
       </text>
     </div>
   );

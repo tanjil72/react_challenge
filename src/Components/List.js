@@ -11,8 +11,7 @@ function List(props) {
       .then((response) => response.json())
       .then((response) => {
         setMasterDataSource(response.data);
-        //   console.log(response);
-        //   console.log(response.data)
+
       })
       .catch((err) => {
         console.error(err);
