@@ -45,7 +45,7 @@ function List(props) {
       </ul>
       <div>Page {pageNumber} </div>
       <div>
-        <button onClick={handlePrev}>prev</button>
+        <button style={{marginRight:10}} onClick={handlePrev}>prev</button>
         <button onClick={handleNext}>next</button>
       </div>
     </>
