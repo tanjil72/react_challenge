@@ -2,6 +2,46 @@
 .App {
   text-align: center;
 }
+.data{
+  border: 1px solid black;
+  margin: 10px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+h1 {
+  margin: 10px;
+  font-size: 40px;
+  color: rgb(1, 1, 59);
+}
+
+.search {
+  width: 30%;
+  flex-direction: row;
+  display: flex;
+}
+
+ul li {
+  font-size: 20px;
+} 
+
+.FormFiled{
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
 @media all and (min-width: 480px) {
   .LoginContainer {
     padding: 60px 0;

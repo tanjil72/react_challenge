@@ -87,7 +87,7 @@ export default function Login({setAuth}) {
         </Form>
       </div>
       <text style={{ marginTop: 10 }}>
-        Don't have an account? <Link to="/signup">Register</Link>
+        New User? <Link to="/signup">Register</Link>
       </text>
     </div>
   )
