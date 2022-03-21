@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { Routes, Route, Navigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -10,11 +9,12 @@ const initialValues = {
 };
 
 export default function Login({ setAuth }) {
+  //alert(setAuth)
   const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
-  function validateForm() {
-    return values.email.length > 0 && values.password.length > 0;
-  }
+  // function validateForm() {
+  //   return values.email.length > 0 && values.password.length > 0;
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ export default function Login({ setAuth }) {
     let oldArr = JSON.parse(olddata);
     let found=false;
     oldArr.some((user) => {
-      if(user.email==values.email && user.password==values.password){
+      if(user.email===values.email && user.password===values.password){
         found=true
       }
     });
@@ -49,7 +49,7 @@ export default function Login({ setAuth }) {
     }
   }
 
-  return (
+  return setAuth!==undefined?(
     <div className="LoginContainer">
       <div style={{ display: "flex", width: "100%" }}>
         <Form onSubmit={handleSubmit}>
@@ -84,8 +84,8 @@ export default function Login({ setAuth }) {
         </Form>
       </div>
       <text style={{ marginTop: 10 }}>
-        New User? <Link to="/signup">Register</Link>
+        New User? <Link to="/signup"  >Register</Link>
       </text>
     </div>
-  );
+  ):(<div style={{display:'flex',justifyContent:'center'}}><h1>You are not authorized to access this</h1></div>)
 }

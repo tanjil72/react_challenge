@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const initialValues = [
   {
@@ -14,7 +14,6 @@ const initialValues = [
 ];
 
 export default function Signup() {
-  const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
 
   const checkPasswordValidity = (value) => {
@@ -70,10 +69,21 @@ export default function Signup() {
       alert("Registration success")
     }else{
       let oldArr = JSON.parse(olddata)
-      oldArr.push(data)
-      localStorage.setItem("registeredUsers", JSON.stringify(oldArr))
-      localStorage.setItem('Auth', JSON.stringify(false));
-      alert("Registration success")
+      let found=false;
+      oldArr.some((user) => {
+        if(user.email===values.email){
+          found=true
+        }
+      });
+      if(found){
+        alert("User is already registered")
+      }else{
+        oldArr.push(data)
+        localStorage.setItem("registeredUsers", JSON.stringify(oldArr))
+        localStorage.setItem('Auth', JSON.stringify(false));
+        alert("Registration success")
+      }
+
      
     }
   }
@@ -156,7 +166,7 @@ export default function Signup() {
       </Form>
 
       <text style={{ marginTop: 10 }}>
-        Already a user? <Link to="/login">Login</Link>
+        Already a user? <Link to="/">Login</Link>
       </text>
     </div>
   );

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Form from "react-bootstrap/Form";
 
 export default function FormDialog({ user }) {
   const [open, setOpen] = React.useState(false);
@@ -40,7 +38,7 @@ export default function FormDialog({ user }) {
       })
         .then((response) => response.json())
         .then((response) => {
-          if (response.status == "success") {
+          if (response.status === "success") {
             alert("Updated successfully");
           } else {
             alert("Error occured");
@@ -59,7 +57,7 @@ export default function FormDialog({ user }) {
     })
       .then((response) => response.json())
       .then((response) => {
-        if (response.status == "success") {
+        if (response.status === "success") {
           alert("Deleted successfully");
         } else {
           alert("Error occured");
@@ -89,9 +87,11 @@ export default function FormDialog({ user }) {
         key={user.id}
       >
         <div className="data" onClick={handleClickOpen}>
-          <ul style={{textAlign:"left"}}>
-            <text>Name:{user.employee_name}</text><br />
-            <text>Age:{user.employee_age}</text><br />
+          <ul style={{ textAlign: "left" }}>
+            <text>Name:{user.employee_name}</text>
+            <br />
+            <text>Age:{user.employee_age}</text>
+            <br />
             <text>Salary:{user.employee_salary}</text>
           </ul>
         </div>
@@ -121,42 +121,42 @@ export default function FormDialog({ user }) {
           </DialogActions>
         </Dialog>
       </div>
-
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Update info</DialogTitle>
-        <DialogContent>
-
-          <input
-            type="text"
-            name="name"
-            onChange={handleName}
-            placeholder="Name"
-            value={name}
-            style={{marginBottom:10}}
-          />
-          <br />
-          <input
-            type="text"
-            name="salary"
-            onChange={handleSalary}
-            placeholder="Salary"
-            value={salary}
-            style={{marginBottom:10}}
-          />
-          <br />
-          <input
-            type="text"
-            name="age"
-            onChange={handleAge}
-            placeholder="Age"
-            value={age}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-          <Button onClick={handleUpdate}>Update</Button>
-        </DialogActions>
-      </Dialog>
+      <div>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Update info</DialogTitle>
+          <DialogContent>
+            <input
+              type="text"
+              name="name"
+              onChange={handleName}
+              placeholder="Name"
+              value={name}
+              style={{ marginBottom: 10 }}
+            />
+            <br />
+            <input
+              type="text"
+              name="salary"
+              onChange={handleSalary}
+              placeholder="Salary"
+              value={salary}
+              style={{ marginBottom: 10 }}
+            />
+            <br />
+            <input
+              type="text"
+              name="age"
+              onChange={handleAge}
+              placeholder="Age"
+              value={age}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Close</Button>
+            <Button onClick={handleUpdate}>Update</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </div>
   );
 }

@@ -7,9 +7,7 @@
   margin-bottom: 10px;
   margin-right: 10px;
   width: 300px;
-  display: flex;
- 
-  text-align: center;
+
 }
 
 .main {
@@ -26,11 +24,15 @@ h1 {
   font-size: 40px;
   color: rgb(1, 1, 59);
 }
+.searchbar{
+  width: 200px;
+}
 
 .search {
   width: 30%;
   flex-direction: row;
   display: flex;
+  justify-content: center;
   margin-top: 10px;
 }
 
