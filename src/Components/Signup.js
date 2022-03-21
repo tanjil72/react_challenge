@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Link,Navigate,useNavigate} from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const initialValues = [
   {
@@ -60,33 +60,29 @@ export default function Signup() {
     });
   };
 
-  function SaveDataToLocalStorage(data)
-{
-  let retrievedData = localStorage.getItem("registeredUsers");
-  let users = JSON.parse(retrievedData);
-  let Found = users.find(function(user, index) {
-    if(user.email === values.email){
-      return true
+  function SaveDataToLocalStorage(data) {
+    let olddata = localStorage.getItem('registeredUsers');
+    if(olddata==null){
+      olddata = []
+      olddata.push(data)
+      localStorage.setItem('registeredUsers', JSON.stringify(olddata));
+      alert("Registration success")
+    }else{
+      let oldArr = JSON.parse(olddata)
+      oldArr.push(data)
+      localStorage.setItem("registeredUsers", JSON.stringify(oldArr))
+      alert("Registration success")
+     
     }
-      
-  });
-  if(Found){
-    alert("User is already registered")
-  }else{
-    var registeredUsers = [];
-    registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-    registeredUsers.push(data); 
-    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
-    alert("Registration Successful")
   }
-}
 
   const handleSubmit = (e) => {
-
     if (values.password === values.confirmPassword) {
       const check = checkPasswordValidity(values.password);
       if (!check) {
-        SaveDataToLocalStorage(values)
+        // e.preventDefault();
+        SaveDataToLocalStorage(values);
+        //alert("Checking pass")
       } else {
         alert(check);
         e.preventDefault();

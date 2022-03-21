@@ -34,11 +34,10 @@ export default function FormDialog({ user }) {
       })
         .then((response) => response.json())
         .then((response) => {
-            if(response.status=='success'){
-              alert("Updated successfully")
-              
-          }else{
-              alert("Error occured")
+          if (response.status == "success") {
+            alert("Updated successfully");
+          } else {
+            alert("Error occured");
           }
         });
     } else {
@@ -48,24 +47,19 @@ export default function FormDialog({ user }) {
     setOpen(false);
   };
 
-  const handleDelete=()=>{
-    
-      fetch(`http://dummy.restapiexample.com/public/api/v1/delete/${user.id}`, {
-        method: "DELETE",
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          if(response.status=='success'){
-            alert("Deleted successfully")
-            
-        }else{
-            alert("Error occured")
+  const handleDelete = () => {
+    fetch(`http://dummy.restapiexample.com/public/api/v1/delete/${user.id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.status == "success") {
+          alert("Deleted successfully");
+        } else {
+          alert("Error occured");
         }
-        });
-    } 
-  
-
-
+      });
+  };
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -82,14 +76,22 @@ export default function FormDialog({ user }) {
       {/* <Button variant="outlined" onClick={handleClickOpen}>
         Open form dialog
       </Button> */}
-      <div style={{display:'flex',justifyContent:'center',alignItems:'center'}} key={user.id}>
-      <div className="data" onClick={handleClickOpen}>
-        <ul >
-          <text>{user.employee_name}</text>
-        </ul>
-        
-      </div>
-      <button title="Delete" onClick={handleDelete}>Delete</button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        key={user.id}
+      >
+        <div className="data" onClick={handleClickOpen}>
+          <ul>
+            <text>{user.employee_name}</text>
+          </ul>
+        </div>
+        <button title="Delete" onClick={handleDelete}>
+          Delete
+        </button>
       </div>
 
       <Dialog open={open} onClose={handleClose}>

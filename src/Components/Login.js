@@ -4,13 +4,12 @@ import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-
 const initialValues = {
   email: "",
   password: "",
 };
 
-export default function Login({setAuth}) {
+export default function Login({ setAuth }) {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
   function validateForm() {
@@ -20,8 +19,6 @@ export default function Login({setAuth}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     Login();
-
-    
   };
 
   const handleInputChange = (e) => {
@@ -34,21 +31,18 @@ export default function Login({setAuth}) {
   };
 
   function Login() {
-    let retrievedData = localStorage.getItem("registeredUsers");
-    let users = JSON.parse(retrievedData);
-    let Found = users.find(function (user, index) {
-      if (user.email === values.email && user.password === values.password) {
-        return true;
+    let olddata = localStorage.getItem("registeredUsers");
+    let oldArr = JSON.parse(olddata);
+    let found=false;
+    oldArr.some((user) => {
+      if(user.email==values.email && user.password==values.password){
+        found=true
       }
     });
-    if (Found) {
-      
-      setAuth("true")
-      let auth = "true";
-      localStorage.setItem("auth", JSON.stringify(auth));
-      //navigate("/");
-    } else {
-      alert("Error email/password");
+    if(found){
+      alert("Login success")
+    }else{
+      alert("Error email/password")
     }
   }
 
@@ -90,5 +84,5 @@ export default function Login({setAuth}) {
         New User? <Link to="/signup">Register</Link>
       </text>
     </div>
-  )
+  );
 }
