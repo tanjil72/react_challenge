@@ -104,7 +104,7 @@ export default function HomePage({ setAuth }) {
           </button>
         </div>
       </div>
-      
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Create</DialogTitle>
         <DialogContent>
@@ -114,6 +114,7 @@ export default function HomePage({ setAuth }) {
             onChange={handleName}
             placeholder="Name"
             value={name}
+            style={{marginBottom:5}}
           />
           <br />
           <input
@@ -122,6 +123,7 @@ export default function HomePage({ setAuth }) {
             onChange={handleSalary}
             placeholder="Salary"
             value={salary}
+            style={{marginBottom:5}}
           />
           <br />
           <input

@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 
 export default function FormDialog({ user }) {
   const [open, setOpen] = React.useState(false);
+  const [openDelete, setOpenDelete] = React.useState(false);
 
   const [name, setName] = useState(user.employee_name);
   const [age, setAge] = useState(user.employee_age);
@@ -18,7 +19,12 @@ export default function FormDialog({ user }) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const handleDeleteOpen = () => {
+    setOpenDelete(true);
+  };
+  const handleDeleteClose = () => {
+    setOpenDelete(false);
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -47,7 +53,7 @@ export default function FormDialog({ user }) {
     setOpen(false);
   };
 
-  const handleDelete = () => {
+  const confirmDelete = () => {
     fetch(`http://dummy.restapiexample.com/public/api/v1/delete/${user.id}`, {
       method: "DELETE",
     })
@@ -59,9 +65,8 @@ export default function FormDialog({ user }) {
           alert("Error occured");
         }
       });
+    setOpenDelete(false);
   };
-
-
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -75,7 +80,6 @@ export default function FormDialog({ user }) {
 
   return (
     <div>
-
       <div
         style={{
           display: "flex",
@@ -85,19 +89,42 @@ export default function FormDialog({ user }) {
         key={user.id}
       >
         <div className="data" onClick={handleClickOpen}>
-          <ul>
-            <text>{user.employee_name}</text>
+          <ul style={{textAlign:"left"}}>
+            <text>Name:{user.employee_name}</text><br />
+            <text>Age:{user.employee_age}</text><br />
+            <text>Salary:{user.employee_salary}</text>
           </ul>
         </div>
-        <button title="Delete" onClick={handleDelete}>
+        <button title="Delete" onClick={handleDeleteOpen}>
           Delete
         </button>
+
+        <Dialog
+          open={openDelete}
+          onClose={handleDeleteClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Delete Employee Data"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to delete?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDeleteClose}>Cancel</Button>
+            <Button onClick={confirmDelete} autoFocus>
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Update</DialogTitle>
+        <DialogTitle>Update info</DialogTitle>
         <DialogContent>
-          {/* <DialogContentText>Employee Details</DialogContentText> */}
 
           <input
             type="text"
@@ -105,6 +132,7 @@ export default function FormDialog({ user }) {
             onChange={handleName}
             placeholder="Name"
             value={name}
+            style={{marginBottom:10}}
           />
           <br />
           <input
@@ -113,6 +141,7 @@ export default function FormDialog({ user }) {
             onChange={handleSalary}
             placeholder="Salary"
             value={salary}
+            style={{marginBottom:10}}
           />
           <br />
           <input

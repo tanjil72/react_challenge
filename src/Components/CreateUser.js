@@ -65,6 +65,7 @@ export default function FormDialog({ value }) {
             onChange={handleName}
             placeholder="Name"
             value={name}
+            style={{marginBottom:5}}
           />
           <br />
           <input
@@ -73,6 +74,7 @@ export default function FormDialog({ value }) {
             onChange={handleSalary}
             placeholder="Salary"
             value={salary}
+            style={{marginBottom:5}}
           />
           <br />
           <input
