@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const initialValues = [
   {
@@ -15,7 +15,7 @@ const initialValues = [
 
 export default function Signup() {
   const [values, setValues] = useState(initialValues);
-
+const navigate=useNavigate()
   const checkPasswordValidity = (value) => {
     const isNonWhiteSpace = /^\S*$/;
     if (!isNonWhiteSpace.test(value)) {
@@ -67,6 +67,7 @@ export default function Signup() {
       localStorage.setItem('registeredUsers', JSON.stringify(olddata));
       localStorage.setItem('Auth', JSON.stringify(false));
       alert("Registration success")
+      navigate('/')
     }else{
       let oldArr = JSON.parse(olddata)
       let found=false;
@@ -82,6 +83,7 @@ export default function Signup() {
         localStorage.setItem("registeredUsers", JSON.stringify(oldArr))
         localStorage.setItem('Auth', JSON.stringify(false));
         alert("Registration success")
+        navigate('/')
       }
 
      
