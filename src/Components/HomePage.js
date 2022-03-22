@@ -31,15 +31,13 @@ export default function HomePage({ setAuth }) {
     >
       <div className="main">
         <div className="search">
-
-            <DebounceInput
-            style={{width:'70%',height:40}}
-              className="searchbar"
-              debounceTimeout={500}
-              placeholder="Search"
-              onChange={inputHandler}
-            />
-     
+          <DebounceInput
+            style={{ width: "70%", height: 40 }}
+            className="searchbar"
+            debounceTimeout={500}
+            placeholder="Search"
+            onChange={inputHandler}
+          />
 
           <button
             style={{ marginLeft: 10 }}

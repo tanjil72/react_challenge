@@ -32,24 +32,34 @@ function List(props) {
     if (props.input === "") {
       return el;
     } else {
-      return el.employee_name.toLowerCase().includes(props.input)
+      return el.employee_name.toLowerCase().includes(props.input);
     }
   });
 
   const paginatedData = filteredData.splice(currentPageNumber, postNumber);
-  
+
   return (
     <>
       <ul>
-        
         {paginatedData.map((user) => (
           <UpdateDialogue user={user} key={user.id} />
         ))}
       </ul>
       <div>Page {pageNumber} </div>
       <div>
-        <button disabled={pageNumber==1} style={{marginRight:10}} onClick={handlePrev}>prev</button>
-        <button disabled={pageNumber*postNumber>paginatedData} onClick={handleNext}>next</button>
+        <button
+          disabled={pageNumber === 1}
+          style={{ marginRight: 10 }}
+          onClick={handlePrev}
+        >
+          prev
+        </button>
+        <button
+          disabled={pageNumber * postNumber > paginatedData}
+          onClick={handleNext}
+        >
+          next
+        </button>
       </div>
     </>
   );

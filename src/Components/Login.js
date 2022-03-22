@@ -9,12 +9,8 @@ const initialValues = {
 };
 
 export default function Login({ setAuth }) {
-  //alert(setAuth)
   const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
-  // function validateForm() {
-  //   return values.email.length > 0 && values.password.length > 0;
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,11 +30,14 @@ export default function Login({ setAuth }) {
     let olddata = localStorage.getItem("registeredUsers");
     let oldArr = JSON.parse(olddata);
     let found=false;
-    oldArr.some((user) => {
-      if(user.email===values.email && user.password===values.password){
-        found=true
-      }
-    });
+    if(oldArr!=null){
+      oldArr.some((user) => {
+        if(user.email===values.email && user.password===values.password){
+          found=true
+        }
+      });
+    }
+    
     if(found){
       setAuth(true)
       localStorage.setItem('Auth', JSON.stringify(true));
@@ -77,7 +76,6 @@ export default function Login({ setAuth }) {
             block
             size="lg"
             type="submit"
-            // disabled={!validateForm()}
           >
             Login
           </Button>
