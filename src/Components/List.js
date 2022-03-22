@@ -18,6 +18,9 @@ function List(props) {
   };
 
   useEffect(() => {
+    if (props.input) {
+      setPageNumber(1);
+    }
     fetch(API_URL)
       .then((response) => response.json())
       .then((response) => {
@@ -26,7 +29,7 @@ function List(props) {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [props.input]);
 
   const filteredData = EmployeeData.filter((el) => {
     if (props.input === "") {
